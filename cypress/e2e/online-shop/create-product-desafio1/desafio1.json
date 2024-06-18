@@ -1,0 +1,13 @@
+{
+    "productInfo" : {
+        "name": "Remera lisa roja",
+        "price": "20000",
+        "id": "",
+        "img": "https://acdn.mitiendanube.com/stores/001/333/138/products/rem-rojo1-3c3a10a972a3f9e21e16957472045682-240-0.png"
+    },
+
+    "userInfo": {
+        "name": "pushingit",
+        "password": "123456!"
+    }
+}
