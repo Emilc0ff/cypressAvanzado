@@ -55,8 +55,8 @@ describe(`${suiteName} - ${module}`, () => {
             onlineShopPage.clickSearchInput(`${data.product.id}`);
             cy.wait(3000)
             onlineShopPage.getFirstProductImage().should('have.attr', 'src', `${data.newProduct.img}`)
-            onlineShopPage.getProductName().should('contain', `${data.newProduct.name}`)
-            onlineShopPage.getProductPrice().should('contain', `${data.newProduct.price}`)
+            cy.getByDataCy(`name`).should('contain', `${data.newProduct.name}`)
+            cy.getByDataCy(`price`).should('contain', `${data.newProduct.price}`)
         });
     });
 });

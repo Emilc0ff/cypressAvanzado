@@ -39,3 +39,7 @@ Cypress.Commands.add('login', (username, password) => {
         Cypress.env().token = respuesta.body.token
     })
 })
+
+Cypress.Commands.add('getByDataCy', (selector) => {
+    return cy.get(`[data-cy=${selector}]`)
+})
