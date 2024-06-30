@@ -1,0 +1,13 @@
+{
+    "product": {
+        "name": "Remera",
+        "price": 20,
+        "img": "https://dcdn.mitiendanube.com/stores/001/698/478/products/remera-negra-hombre1-13d0f5bda838120d2316213666641926-1024-1024.png",
+        "id" : 2 
+    },
+    "newProduct": {
+        "img": "https://img.freepik.com/foto-gratis/modelo-camiseta-negra-aislada-vista-frontal_125540-1073.jpg?w=1380&t=st=1719783336~exp=1719783936~hmac=419fc028c4fd53b7d4f0da8d9a3aa1d5914fc6700a25caf23bf6bc74802fced6", 
+        "name": "Remera editada",
+        "price": 30
+    }
+}

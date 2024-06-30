@@ -9,10 +9,11 @@ export class OnlineShopPage {
         this.createProductButton = 'Create product'
         this.closeModalButton = 'button[data-cy="closeModal"]'
         this.searchType = 'select[data-cy="search-type"]'
-        //this.deleteButton = 'button[aria-label="Delete"]'
         this.deleteModal = 'Delete'
         this.selectIdSearch = 'select[data-cy="search-type"]'
-        
+        this.firstProductImage = 'img[alt="Dan Abramov"]'
+        this.productName = '[data-cy="name"]'
+        this.productPrice = '[data-cy="price"]'
     }
 
     clickSearchInput(product) {
@@ -63,6 +64,17 @@ export class OnlineShopPage {
     return    cy.contains(item)
     }
 
+    getFirstProductImage() {
+        return cy.get(this.firstProductImage)
+    }
+
+    getProductName() {
+        return cy.get(this.productName)
+    }
+
+    getProductPrice() {
+        return cy.get(this.productPrice)
+    }
 
 
 }
