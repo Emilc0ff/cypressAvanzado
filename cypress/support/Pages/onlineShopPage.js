@@ -76,5 +76,13 @@ export class OnlineShopPage {
         return cy.get(this.productPrice)
     }
 
+    addToCart(product) {
+        return cy.get(`[data-cy="add-to-cart-${product}"]`).click()
+    }
+
+    goToShoppingCart() {
+        return cy.get('[data-cy=goShoppingCart]').click()
+    }
+
 
 }

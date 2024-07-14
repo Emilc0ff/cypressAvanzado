@@ -1,0 +1,20 @@
+{
+    "product": {
+        "name": "Remera rosa",
+        "price": 20,
+        "img": "https://static.vecteezy.com/system/resources/previews/021/104/104/original/pink-t-shirt-free-png.png",
+        "id" : 2 
+    },
+    "product2": {
+        "name": "Pantalon rojo",
+        "price" : 40,
+        "img": "https://w7.pngwing.com/pngs/37/592/png-transparent-jeans-chino-cloth-pants-boy-clothing-jeans-fashion-boy-abdomen.png",
+        "id" : 4
+    },
+    "cardNumber": 1234567891234567,
+    "customer": {
+        "name": "Elias",
+        "lastname" : "Milcoff",
+        "cardnumber": "1234567891234567"
+    } 
+}
