@@ -8,19 +8,20 @@ import { ShoppingCartPage } from '../../../support/Pages/shoppingCartPage';
 import { BillingPage } from '../../../support/Pages/billingPage';
 import { CheckoutPage } from '../../../support/Pages/checkoutPage';
 
+
 before(() => {
     cy.login(Cypress.env().username, Cypress.env().password)
     cy.visit('')
 });
 
 describe(`${suiteName} - ${module}`, () => {
-    const homePage = new HomePage;
-    const onlineShopPage = new OnlineShopPage;
+    const homepage = new HomePage
+    const onlineShopPage = new OnlineShopPage
     const shoppingCartPage = new ShoppingCartPage
     const billingPage = new BillingPage
     const checkoutPage = new CheckoutPage
 
-    it('Desafio 3', function () {
+    it('Desafio final', () => {
         cy.fixture(`${module}/${suiteName}-${suiteId}/${suiteId}.json`).then(data => {
             cy.request({
                 method: "get",
@@ -70,7 +71,7 @@ describe(`${suiteName} - ${module}`, () => {
                 Authorization: `${Cypress.env().token}`
             })
 
-            homePage.clickOnlineShop()
+            homepage.clickOnlineShop()
             onlineShopPage.searchAsId()
             onlineShopPage.clickSearchInput(`${data.product.id}`);
             onlineShopPage.addToCart(data.product.id);
@@ -83,12 +84,32 @@ describe(`${suiteName} - ${module}`, () => {
             onlineShopPage.addToCart(data.product2.id);
             onlineShopPage.closeModal();
             onlineShopPage.goToShoppingCart();
-            shoppingCartPage.goToBilling();
-            billingPage.goToCheckout();
-            checkoutPage.firstName(data.customer.name);
-            checkoutPage.lastName(data.customer.lastname);
-            checkoutPage.cardNumber(data.customer.cardnumber);
-            checkoutPage.clickPurchase();
+            cy.getByDataCy('productAmount').eq(0).should('have.text', 2)
+            cy.getByDataCy('productName').eq(0).should('have.text', data.product.name)
+            cy.getByDataCy('unitPrice').eq(0).should('have.text', `$${data.product.price}`)
+            cy.getByDataCy('totalPrice').eq(0).should('have.text', `$${data.product.price * 2}`)
+            cy.getByDataCy('productAmount').eq(1).should('have.text', 2)
+            cy.getByDataCy('productName').eq(1).should('have.text', data.product2.name)
+            cy.getByDataCy('unitPrice').eq(1).should('have.text', `$${data.product2.price}`)
+            cy.getByDataCy('totalPrice').eq(1).should('have.text', `$${data.product2.price * 2}`)
+            const expectedOrderPrice = (data.product.price * 2) + (data.product2.price * 2)
+            shoppingCartPage.showTotalPrice()
+            shoppingCartPage.getTotalPrice().invoke('text').as('actualOrderPrice')
+            cy.then(function () {
+                expect(this.actualOrderPrice).to.be.eq(`${expectedOrderPrice}.00`)
+                shoppingCartPage.goToBilling()
+                cy.verifyBilling({
+                    "subtotalAmount": `${expectedOrderPrice}`,
+                    "freightAmount": "Free",
+                    "totalPriceAmount": `${expectedOrderPrice}`
+                })  
+            })
+            billingPage.goToCheckout()
+            checkoutPage.firstName(data.customer.name)
+            checkoutPage.lastName(data.customer.lastname)
+            checkoutPage.cardNumber(data.customer.cardnumber)
+            checkoutPage.clickPurchase()
+            checkoutPage.interceptPost()
             checkoutPage.getSelliD().invoke('text').as('sellId');
             checkoutPage.getMoneySpent().invoke('text').as('moneySpent');
             checkoutPage.interceptPost();
@@ -116,4 +137,4 @@ describe(`${suiteName} - ${module}`, () => {
             })
         });
     });
-});
+})
