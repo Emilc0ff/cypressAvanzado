@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import './models/billing'
+
 Cypress.Commands.add('login', (username, password) => {
     cy.request({
         method: "POST",
